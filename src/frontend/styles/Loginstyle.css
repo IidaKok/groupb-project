@@ -1,0 +1,132 @@
+.Forms {
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  padding: 30px;
+  margin-top: 70px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+.Container {
+  text-align: left;
+  padding: 20px 50px;
+  width: 70%;
+  margin: auto;
+}
+
+.Container a {
+  color: #373738;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+.Container a:hover {
+  color: #804b13;
+}
+
+h2 {
+  color: #373738;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0px;
+  display: inline-block;
+  box-sizing: border-box;
+  border: 2px solid #ccbbaa;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus {
+  border: 2px solid #373838;
+}
+
+
+input[type=text].invalid,
+input[type=password].invalid,
+input[type=email].invalid,
+input[type=text]:focus.invalid,
+input[type=password]:focus.invalid input[type=email]:focus.invalid {
+  border: 2px solid red;
+}
+
+.img {
+  height: 100vh;
+  background-image: url("../login_picture.jpg");
+  background-color: #635d5d;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  padding: 80px;
+}
+
+.blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(2px);
+}
+
+.btn {
+  background-color: transparent;
+  color: #373838;
+  border: 2px solid #373838;
+  transition-duration: 0.4s;
+  padding: 6px 12px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50px;
+  margin-top: 25px;
+  margin: 10px;
+  max-width: 500px;
+}
+
+.btn:hover {
+  background-color: #745732;
+  color: black;
+}
+
+.back {
+  display: flex;
+  justify-content: left;
+  padding: 10px;
+}
+.back div {
+  width: 80%;
+  text-align: center;
+}
+
+/* Small screens */
+@media screen and (max-width: 1800px) {
+  .header {
+      height: 200px;
+  } 
+  .img {
+    min-height: 80vh;
+  }
+  .Forms {
+    margin-top: 120px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .Forms {
+    width: 80%;
+  }
+}

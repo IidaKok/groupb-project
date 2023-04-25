@@ -41,7 +41,7 @@ const createUser = async (req, res, next) => {
         //sends the user's information to the database
         const response = db.pool.query("INSERT INTO user (username, password, email) VALUES ('" + username + "','" + password + "','" + email + "')");
 
-       // res.send(response);
+        setTimeout(async () => {
        try {
         const result1 = await db.pool.query("select * from user where username = '" + username + "'");
         const user = result1.find(u => {
@@ -49,7 +49,8 @@ const createUser = async (req, res, next) => {
         });
 
         if (!user) {
-            return next(new HttpError("Password is incorrect. Try again", 404));
+          console.log("username: ", username);
+            return next(new HttpError("Something went wrong", 404));
         }
 
         console.log(user.iduser);
@@ -62,11 +63,13 @@ const createUser = async (req, res, next) => {
         console.error(error);
         res.status(500).send('Internal server error');
       }
+    }, 1000);
     }
     catch (err) {
         throw err;
     }
 }
+
 //gets all users from the database
 const getAllUsers = async (req, res, next) => {
     try {
@@ -158,7 +161,7 @@ const transporter = nodemailer.createTransport({
     port: 587,
     secure: false,
     auth: {
-      user: "groupb1231@outlook.com",
+      user: "bookarchive2023@outlook.com",
       pass: "KissaKoira58",
     },
   });
@@ -166,10 +169,11 @@ const transporter = nodemailer.createTransport({
   const sendEmail = async (recipientEmail) => {
     try {
       await transporter.sendMail({
-        from: "groupb1231@outlook.com",
+        from: "bookarchive2023@outlook.com",
         to: recipientEmail,
-        subject: "Reset ypur password",
-        html: `<p>Dear user,</p><p>Please click <a href="http://localhost:3000/#/changePassword/${token}">here</a> to reset your password.</p><p>If you didn't request a password reset, please ignore this email.</p>`,
+        subject: "Change your password",
+        html: `<p>Dear user,</p><p>Please click <a href="https://iidakok.github.io/groupb-project/#/changePassword/${token}">here</a> to change your password.</p><p>If you didn't request a password change link, please ignore this email.</p>`,
+        //html: `<p>Dear user,</p><p>Please click <a href="http://localhost:3000/#/changePassword/${token}">here</a> to change your password.</p><p>If you didn't request a password change link, please ignore this email.</p>`,
       });
   
       console.log("Email sent successfully");
@@ -226,7 +230,7 @@ const transporter = nodemailer.createTransport({
   }
 
 
-  //login
+//login
   
 //after user is logged in, users data is returned
 const islogged =  async (req, res) => {

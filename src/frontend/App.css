@@ -1,7 +1,6 @@
 .App {
     text-align: center;
 }
-
 /* User Page CSS */
 .book-grid {
     display: grid;
@@ -139,6 +138,12 @@ img {
     border: 1px solid rgb(204, 204, 243);
     color: rgb(139, 139, 234);
 }
+
+    .update a,
+    .edit a {
+        text-decoration: none;
+        color: inherit;
+    }
 
 .add-bookcopy-form {
     display: flex;
@@ -451,7 +456,7 @@ img {
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .navbar a:first-child {
@@ -462,30 +467,44 @@ img {
     color: #5C7AEA;
 }
 
+.navbar p {
+    margin-left: auto;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-right: 10px;
+    font-size: 13px;
+}
+
+.logout {
+    margin-left: auto;
+    margin-right: 20px;
+    padding: 4px;
+}
+
 
 /* Header */
 .header {
     text-align: center;
+    background-image: url("./header_picture.jpg");
+    background-color: #cccccc;
     color: rgb(90, 88, 88);
-    height: 50%;
+    height: 350px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
 }
 
-/* Increase the font size of the heading */
 .header-text {
     font-size: 40px;
     text-align: center;
     transform: translate(-50%, -50%);
     color: white;
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
 }
-
-
 
 .div {
     position: relative;
@@ -494,7 +513,36 @@ img {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 85%;
+    width: 88%;
     margin: 50px;
+    margin-right: 10px;
+    margin-top: 20px;
     padding: 40px;
 }
+.home-text {
+    padding-left: 120px;
+    padding-right: 105px;
+    padding-top: 20px;
+    font-size: 1.3em;
+}
+.blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(2px);
+  }
+
+/* Small screens */
+@media screen and (max-width: 1800px) {
+    .header {
+        height: 200px;
+    }
+    .div {
+        margin-top: 10px;
+    }
+    .home-text {
+        font-size: 1.1em;
+    }
+  }

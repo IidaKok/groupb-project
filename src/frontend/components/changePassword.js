@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
-import "../Loginstyle.css";
+import "../styles/Loginstyle.css";
 import { Error } from "./InvalidInput";
+import { PasswordSuccess } from "./SuccsessModal";
 
 
 export const ChangePassword = () => {
@@ -13,9 +14,8 @@ export const ChangePassword = () => {
     let location = useLocation();
     const path = location.pathname;
     const tokenfromUrl = path.substring(path.lastIndexOf("/") + 1);
+    const [modalOpen, setModalOpen] = useState(false);
 
-
-    //setMessage(<Link to="/">Link to login</Link>);
     const resett = async () => {
         setButtonPressed(true);
         if (!validPassword) {
@@ -34,21 +34,14 @@ export const ChangePassword = () => {
                 }
                 else {
                     const data = await response.json();
-                    setMessage(<div>
-                        <p>
-                            {data.message}
-                            <Link to="/">Link to login</Link>
-                        </p>
-    
-                    </div>);
-                } 
+                    setModalOpen(true);
+                }
             }
             catch (error) {
                 console.error(error);
             }
         }
     };
-
 
     //password validation
     useEffect(() => {
@@ -73,14 +66,24 @@ export const ChangePassword = () => {
     }
 
     return (
-        <div className="Forms">
-            <div className="Container">
-                <h1>Change password</h1>
-                <input type={type} placeholder="New password..." className={validPassword && buttonPressed ? "invalid" : "valid"} onChange={(e) => setPassword(e.target.value)} />
-                <input type="checkbox" onChange={(e) => showPassword(e.target.checked)} /><label>Show Password</label>
-                {validPassword && buttonPressed ? <Error id="invalidPasswordError" value="Password" text="at least 5 characters, a lowercase letter, an uppercase letter and a number" /> :
-                    message}
-                <button onClick={() => resett()}>Reset</button>
+        <div className="img">
+            <div className="blur">
+                <div className="animate__animated animate__fadeIn animate__slow" style={{ animationDuration: "1s" }}>
+                    <div className="Forms">
+                        <h2>Change password</h2>
+                        <div className="Container">
+
+                            <input type={type} placeholder="New password..." className={validPassword && buttonPressed ? "invalid" : "valid"} onChange={(e) => setPassword(e.target.value)} />
+                            <input type="checkbox" style={{ cursor: "pointer" }} onChange={(e) => showPassword(e.target.checked)} /><label>Show Password</label>
+                            {validPassword && buttonPressed ? <Error id="invalidPasswordError" value="Password" text="at least 5 characters, a lowercase letter, an uppercase letter and a number" /> :
+                                null}
+                                {modalOpen && <PasswordSuccess setModalOpen={setModalOpen}/>}
+                            <br />
+                            <button className="btn" onClick={() => resett()}>Change password</button>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

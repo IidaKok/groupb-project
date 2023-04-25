@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
+import "../styles/Loginstyle.css";
 import { userHomeInfo } from "../data/data";
 
 const Logged = (props) => {
@@ -9,34 +10,6 @@ const Logged = (props) => {
 
     const [shelf, setShelf] = useState([]);
 
-
-    /* useEffect(() => {
-         
-         const fetchBooks = () => {
-                fetch("http://localhost:5000/api/users/createBookshelf/", {
-                     method: "POST",
-                     headers: {
-                         "Content-type": "application/json",
-                     },
-                     body: JSON.stringify({
-                         username: user.username,
-                         iduser: user.iduser
-                     }),
-                 })
-                     .then(response => {
-                         if (response.ok) {
-                             response.json()
-                             .then(c => {
-                                 setShelf(c)}
-                                 )
-                             
-                         }
-                     })
-                     .catch(error => console.log(error))   
-         }
-         fetchBooks();
-         
-     }, []);*/
     useEffect(() => {
         const fetchBooks = async () => {
 
@@ -50,29 +23,16 @@ const Logged = (props) => {
     }, [user.iduser]);
 
     return (
-        <div>
+        <div className="animate__animated animate__fadeIn animate__slow">
             <div className="div">
-                <h1>Welcome, {user.username}</h1>
+                <h1>Welcome</h1>
+                <div className="home-text">
+                    {userHomeInfo.map((text, index) => (<p key={index}>{text}</p>))}
 
-                <p>{userHomeInfo}</p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>iduser</th>
-                            <th>idbookshelf</th>
-                            <th>owner</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{shelf.iduser}</td>
-                            <td>{shelf.idbookshelf}</td>
-                            <td>{shelf.owner}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                </div>
             </div>
         </div>
+
     )
 }
 

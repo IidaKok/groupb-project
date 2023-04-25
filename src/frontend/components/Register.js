@@ -1,16 +1,15 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../Loginstyle.css";
+import "../styles/Loginstyle.css";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Error } from "./InvalidInput";
-import "../Loginstyle.css";
+import { Succsess } from "./SuccsessModal";
 
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [errMsg, setErrMsg] = useState(false);
-  const [regSuccess, setRegSuccess] = useState(false);
   const [userToBeInserted, setuserToBeInserted] = useState(null);
   let navigate = useNavigate();
 
@@ -18,6 +17,10 @@ const Register = () => {
   const [passwordAgain, setPasswordAgain] = useState("");
 
   const [type, setType] = useState("password");
+
+  const [timer, setTimer] = useState(null);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [countdown, setCountdown] = useState(5);
 
 
   const [validName, setValidName] = useState(false);
@@ -57,11 +60,20 @@ const Register = () => {
 
               console.log("INSERT:", data);
               setuserToBeInserted(null);
-              setRegSuccess(true);
               setUsername("");
               setPassword("");
               setPasswordAgain("");
               setEmail("");
+
+
+              setTimerRunning(true);
+              setTimer(setTimeout(() => {
+                setTimerRunning(false);
+                setTimer(null);
+                navigate("/");
+              }, countdown * 1000));
+             // setRegSuccess(true);
+
               return;
             }
             setErrMsg(true);
@@ -88,9 +100,25 @@ const Register = () => {
     if (userToBeInserted != null) insertUser();
   }, [userToBeInserted]);
 
-  /* if (regSuccess) {
-     navigate("/");
-   }*/
+ // Update the countdown timer every second while the timer is running
+ useEffect(() => {
+  if (timerRunning && countdown > 0) {
+    const interval = setInterval(() => {
+      setCountdown(countdown - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }
+}, [timerRunning, countdown]);
+
+
+   // Clear the timer when the component unmounts
+  useEffect(() => {
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    }
+  }, [timer]);
 
   //password validation
   useEffect(() => {
@@ -164,10 +192,12 @@ const Register = () => {
     }
     else setType("Password");
   }
+  
   return (
     <div className="img">
       <div className="blur">
-        <div className="Forms">
+      <div className="animate__animated animate__fadeIn animate__slow" style={{ animationDuration: "1s" }}>
+        <div className="Forms" style={{marginTop: "60px"}}>
           <h2>Register</h2>
           <div className="Container">
             <form onSubmit={(e) => handleSubmit(e)}>
@@ -186,22 +216,24 @@ const Register = () => {
               <input data-testid="password2" type={type} value={passwordAgain} className={passMatch ? "invalid" : "valid"} onChange={(e) => setPasswordAgain(e.target.value)} placeholder="Password again..." />
               {passMatch ? <p data-testid="noMatchError">Passwords don't match</p> : ""}
 
-              <input data-testid="checkbox" type="checkbox" onChange={(e) => showPassword(e.target.checked)} /><label>Show Password</label>
+              <input style={{cursor: "pointer"}} data-testid="checkbox" type="checkbox" onChange={(e) => showPassword(e.target.checked)} /><label>Show Password</label>
               <input type="text" value={email} className={validEmail && buttonPressed || errors.invalidEmail ? "invalid" : "valid"} onChange={(e) => setEmail(e.target.value)} placeholder="Email..." />
               {validEmail && buttonPressed ? <Error id="invalidEmailError" value="Email" /> : ""}
               <p data-testid="emailError">{errors.emailError}</p>
 
-              <input data-testid="regBtn" type="submit" value="Register" />
+              <input className="btn" data-testid="regBtn" type="submit" value="Register" />
 
             </form>
           </div>
 
+          {timerRunning && <Succsess countdown={countdown}/>}
 
           <div className="Container">
             <p>Already have an account? <Link to="/">Login</Link></p>
           </div>
 
         </div>
+      </div>
       </div>
     </div>
   )

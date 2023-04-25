@@ -69,8 +69,8 @@ export const BookInfo = (props) => {
             let response = await fetch("http://localhost:5000/api/artwork");
             let allArtwork = await response.json();
             let findArtwork = allArtwork.filter((a) => a.idbook == idbook);
-            let f = findArtwork.find((a) => a.pagenumber == 1);
-            let b = findArtwork.find((a) => a.pagenumber == 2);
+            let f = findArtwork.find((a) => a.pagenumber == 0);
+            let b = findArtwork.find((a) => a.pagenumber == 99999);
             setFront(f);
             setBack(b);
         };
@@ -138,7 +138,7 @@ export const BookInfo = (props) => {
                     body: JSON.stringify({
                         photoname: fCoverImage.filename,
                         idbookcopy: idBCopy,
-                        pagenumber: 1,
+                        pagenumber: 0,
                     }),
                 });
                 console.log("INSERT FRONT PHOTO:", r);
@@ -152,7 +152,7 @@ export const BookInfo = (props) => {
                     body: JSON.stringify({
                         photoname: bCoverImage.filename,
                         idbookcopy: idBCopy,
-                        pagenumber: 2,
+                        pagenumber: 99999,
                     }),
                 });
                 console.log("INSERT BACK PHOTO:", r);
@@ -206,8 +206,8 @@ export const BookInfo = (props) => {
         setOpenEdit(false)
     }
     const openPictureModal = (cover) => {
-        if (cover == 1) setCoverNro(1);
-        if (cover == 2) setCoverNro(2);
+        if (cover == 0) setCoverNro(0);
+        if (cover == 99999) setCoverNro(99999);
         setAddPicture(true);
     }
     const closePictureModal = () => {
@@ -288,47 +288,49 @@ export const BookInfo = (props) => {
     };
 
     return (
-        <div className='flex-base-bookinfo'>
-            <div className='pic-box'>
-                <NavLink to={"/series/books/" + oneBook.idbookseries} style={{ textDecoration: "none", color: "grey" }}>← Back to books</NavLink>
-                <div className='pic-box-pictures'>
-                    {fCoverImage ? <img src={`${fCoverImage.filename}`} /> : <img src="https://i.imgur.com/Qr08eFc.png" style={{ width: "250px", height: "250px" }} />}
-                    {bCoverImage ? <img src={`${bCoverImage.filename}`} /> : <img src="https://i.imgur.com/Qr08eFc.png" style={{ width: "250px", height: "250px" }} />}
+        <div className="animate__animated animate__fadeIn animate__slow">
+            <div className='flex-base-bookinfo'>
+                <div className='pic-box'>
+                    <NavLink to={"/series/books/" + oneBook.idbookseries} style={{ textDecoration: "none", color: "grey" }}>← Back to books</NavLink>
+                    <div className='pic-box-pictures'>
+                        {fCoverImage ? <img src={`${fCoverImage.filename}`} /> : <img src="https://i.imgur.com/Qr08eFc.png" style={{ width: "250px", height: "250px" }} />}
+                        {bCoverImage ? <img src={`${bCoverImage.filename}`} /> : <img src="https://i.imgur.com/Qr08eFc.png" style={{ width: "250px", height: "250px" }} />}
+                    </div>
+                    {dataLoaded && hasSeriesInBookShelf &&
+                        <>
+                            {fCoverImage ? <p><button onClick={openEditPicModal}>Change the cover picture</button></p> : <p><button onClick={() => { openPictureModal(0) }}>Add a cover picture</button></p>}
+                            {bCoverImage ? <p><button onClick={openEditPicModal}>Change the back cover picture</button></p> : <p><button onClick={() => { openPictureModal(99999) }}>Add a back cover picture</button></p>}
+                            {addPicture && <BrowserAddPic closePictureModal={closePictureModal} bookid={idbook} setImageUpdate={updateImage} cover={coverNro} />}
+                            {editPicture && <BrowserEditPic closeEditPicModal={closeEditPicModal} picToEdit={fCoverImage} setImageUpdate={updateImage} />}
+                        </>
+                    }
                 </div>
-                {dataLoaded && hasSeriesInBookShelf &&
-                    <>
-                        {fCoverImage ? <p><button onClick={openEditPicModal}>Change the cover picture</button></p> : <p><button onClick={() => { openPictureModal(1) }}>Add a cover picture</button></p>}
-                        {bCoverImage ? <p><button onClick={openEditPicModal}>Change the back cover picture</button></p> : <p><button onClick={() => { openPictureModal(2) }}>Add a back cover picture</button></p>}
-                        {addPicture && <BrowserAddPic closePictureModal={closePictureModal} bookid={idbook} setImageUpdate={updateImage} cover={coverNro} />}
-                        {editPicture && <BrowserEditPic closeEditPicModal={closeEditPicModal} picToEdit={fCoverImage} setImageUpdate={updateImage} />}
-                    </>
-                }
-            </div>
-            <div className='data-box'>
-                <h3>{oneBook.bookname}</h3>
-                <p><b>Publication year: </b>{oneBook.publicationyear}</p>
-                <p><b>Author: </b>{oneBook.writer}</p>
-                <p><b>Description: </b>{oneBook.description}</p>
-                {addClicked ? 
-                    <button className='add-books-btn' onClick={() => insertBook(quickAddBook)}>Confirm?</button> :
-                    <button className='add-books-btn' onClick={(e) => { e.preventDefault(); setAddClicked(true) }}>Quick add</button>
-                }
+                <div className='data-box'>
+                    <h3>{oneBook.bookname}</h3>
+                    <p><b>Publication year: </b>{oneBook.publicationyear}</p>
+                    <p><b>Author: </b>{oneBook.writer}</p>
+                    <p><b>Description: </b>{oneBook.description}</p>
+                    {addClicked ?
+                        <button className='add-books-btn' onClick={() => insertBook(quickAddBook)}>Confirm?</button> :
+                        <button className='add-books-btn' onClick={(e) => { e.preventDefault(); setAddClicked(true) }}>Quick add</button>
+                    }
 
-                <button className='add-books-btn' onClick={openModal}>Add with information</button>
-                {modalOpen && <AddBookModal closeModal={closeModal} insertBook={insertBook} id={oneBook.idbook} />}
+                    <button className='add-books-btn' onClick={openModal}>Add with information</button>
+                    {modalOpen && <AddBookModal closeModal={closeModal} insertBook={insertBook} id={oneBook.idbook} />}
 
-                {dataLoaded && hasSeriesInBookShelf &&
-                    <>
-                        <p>Edit information about this book: <button className='update' onClick={openEditModal}>Edit</button></p>
-                        {openEdit && <BrowserEditBook closeEditModal={closeEditModal} bookToEdit={oneBook} />}
-                        <p>Delete book:
-                            {bookToDelete ?
-                                <button className='delete' onClick={deleteBook(oneBook.idbook)}>Confirm?</button> :
-                                <button className='delete' onClick={() => setBookToDelete(oneBook.idbook)}>Delete</button>
-                            }
-                        </p>
-                    </>
-                }
+                    {dataLoaded && hasSeriesInBookShelf &&
+                        <>
+                            <p>Edit information about this book: <button className='update' onClick={openEditModal}>Edit</button></p>
+                            {openEdit && <BrowserEditBook closeEditModal={closeEditModal} bookToEdit={oneBook} />}
+                            <p>Delete book:
+                                {bookToDelete ?
+                                    <button className='delete' onClick={deleteBook(oneBook.idbook)}>Confirm?</button> :
+                                    <button className='delete' onClick={() => setBookToDelete(oneBook.idbook)}>Delete</button>
+                                }
+                            </p>
+                        </>
+                    }
+                </div>
             </div>
         </div>
     )
