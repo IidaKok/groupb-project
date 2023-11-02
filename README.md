@@ -3,7 +3,7 @@
 ## Project Description:
 A web application for vintage book collectors to easily view books or magazines belonging to a specific series. The application also allows managing one's collection of these series and the books or magazines they encompass.
 
-## Application Requirements:
+## Project Requirements:
 - Custom browser-based client (frontend)
 - Custom backend
 - Database (SQL, MongoDB, etc.)
