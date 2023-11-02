@@ -1,7 +1,7 @@
 # Software Engineering 2 Project
 
 ## Project Description:
-A web application for vintage book collectors to easily view books or magazines belonging to a specific series. The application also allows managing one's collection of these series and the books or magazines they encompass.
+A web application intended for collectors of old books, where you can easily view books and magazines belonging to a certain series. The application can also be used to manage your own collection of an already existing series and the books and magazines that belong to it. Moreover, users have the capability to add entirely new series, books, and magazines to their collection.
 
 ## Project Requirements:
 - Custom browser-based client (frontend)
