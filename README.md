@@ -17,4 +17,4 @@ A web application for vintage book collectors to easily view books or magazines 
      - /groupb-project -> `npm install`
      - /groupb-project/src/backend -> `npm install -g nodemon`
 5. Start the backend in the location: /groupb-project/src/backend -> `nodemon App.js`
-6. Open in a web browser: [Group B Project Web App](https://iidakok.github.io/groupb-project/)
+6. [Open in a web browser](https://iidakok.github.io/groupb-project/)
