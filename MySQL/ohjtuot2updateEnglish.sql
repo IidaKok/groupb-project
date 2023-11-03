@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`picture` (
   `artist` VARCHAR(45) NULL,
   `style` VARCHAR(45) NULL,
   `description` VARCHAR(45) NULL,
-  `filename` VARCHAR(45) NULL,
+  `filename` VARCHAR(255) NULL,
   PRIMARY KEY (`idpicture`))
 ENGINE = InnoDB;
 
@@ -132,14 +132,14 @@ CREATE TABLE IF NOT EXISTS `mydb`.`bookcopy` (
   `bookname` VARCHAR(45) NULL,
   `edition` INT NULL,
   `publicationyear` YEAR NULL,
-  `idbook` INT NOT NULL,
+  `idbook` INT NULL,
   `purchaseprice` DECIMAL(6,2) NULL,
   `purchasedate` DATE NULL,
   `condition` INT NULL,
-  `description` VARCHAR(45) NULL,
+  `description` VARCHAR(255) NULL,
   `solddate` DATE NULL,
   `soldprice` DECIMAL(6,2) NULL,
-  `idbookseries` INT NOT NULL,
+  `idbookseries` INT NULL,
   `idbookshelf` INT NOT NULL,
   PRIMARY KEY (`idbookcopy`),
   INDEX `fk_kirjakopio_Kirja1_idx` (`idbook` ASC) VISIBLE,
@@ -154,7 +154,7 @@ DROP TABLE IF EXISTS `mydb`.`photo` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`photo` (
   `idphoto` INT NOT NULL AUTO_INCREMENT,
-  `photoname` VARCHAR(45) NULL,
+  `photoname` VARCHAR(255) NULL,
   `idbookcopy` INT NOT NULL,
   `pagenumber` INT NULL,
   PRIMARY KEY (`idphoto`),
@@ -214,7 +214,49 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (1, 'Testikuva', '2023', 'Aku Ankka', 'Söpö', 'Roope Ankka', 'roope.png');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (1, 'eka', 'Unknown', 'Unknown', 'Unkown', 'etu', ' https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Harry_Potter_and_the_Philosopher%27s_Stone_Book_Cover.jpg/220px-Harry_Potter_and_the_Philosopher%27s_Stone_Book_Cover.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (2, 'eka', 'Unknown', 'Unknown', 'Unkown', 'taka', ' https://m.media-amazon.com/images/I/71Y-5qRVUlL._AC_UF1000,1000_QL80_.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (3, 'toka', 'Unknown', 'Unknown', 'Unkown', 'etu', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Harry_Potter_and_the_Chamber_of_Secrets.jpg/220px-Harry_Potter_and_the_Chamber_of_Secrets.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (4, 'toka', 'Unknown', 'Unknown', 'Unkown', 'taka', 'https://m.media-amazon.com/images/I/5191isFAtRL._AC_UF1000,1000_QL80_.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (5, 'kolmas', 'Unknown', 'Unknown', 'Unkown', 'etu', 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a0/Harry_Potter_and_the_Prisoner_of_Azkaban.jpg/220px-Harry_Potter_and_the_Prisoner_of_Azkaban.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (6, 'kolmas', 'Unknown', 'Unknown', 'Unkown', 'taka', 'https://cdn01.sapnaonline.com/bk_images/676/9781408855676_1.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (7, 'neljas', 'Unknown', 'Unknown', 'Unkown', 'etu', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b6/Harry_Potter_and_the_Goblet_of_Fire_cover.png/220px-Harry_Potter_and_the_Goblet_of_Fire_cover.png');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (8, 'neljas', 'Unknown', 'Unknown', 'Unkown', 'taka', 'https://store.goodreads.lk/wp-content/uploads/2020/07/9781408855683-1.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (9, 'viides', 'Unknown', 'Unknown', 'Unkown', 'etu', 'https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Harry_Potter_and_the_Order_of_the_Phoenix.jpg/220px-Harry_Potter_and_the_Order_of_the_Phoenix.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (10, 'viides', 'Unknown', 'Unknown', 'Unkown', 'taka', 'https://pictures.abebooks.com/inventory/15775901479_3.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (11, 'kuudes', 'Unknown', 'Unknown', 'Unkown', 'etu', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b5/Harry_Potter_and_the_Half-Blood_Prince_cover.png/220px-Harry_Potter_and_the_Half-Blood_Prince_cover.png');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (12, 'kuudes', 'Unknown', 'Unknown', 'Unkown', 'taka', 'https://prodimage.images-bn.com/pimages/9780439785969_p2_v1_s600x595.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (13, 'seiska', 'Unknown', 'Unknown', 'Unkown', 'etu', 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/Harry_Potter_and_the_Deathly_Hallows.jpg/220px-Harry_Potter_and_the_Deathly_Hallows.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (14, 'seiska', 'Unknown', 'Unknown', 'Unkown', 'taka', 'https://store.goodreads.lk/wp-content/uploads/2020/07/9781408855713-1.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (15, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/8/8e/The_Fellowship_of_the_Ring_cover.gif');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (16, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://www.tolkienguide.com/pictures/books/us-pb/brem-fotr-back.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (17, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/The_Two_Towers_cover.gif/220px-The_Two_Towers_cover.gif');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (18, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://www.tolkienguide.com/pictures/books/us-pb/brem-rotk-back.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (19, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/thumb/1/11/The_Return_of_the_King_cover.gif/220px-The_Return_of_the_King_cover.gif');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (20, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://www.tolkienguide.com/pictures/books/us-pb/brem-rotk-back.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (21, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/9/93/AGameOfThrones.jpg
+');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (22, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://m.media-amazon.com/images/I/810h2BdHmsL._AC_UF1000,1000_QL80_.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (23, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/3/39/AClashOfKings.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (24, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://m.media-amazon.com/images/I/81t6UAt6FqL._AC_UF1000,1000_QL80_.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (25, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/thumb/2/24/AStormOfSwords.jpg/220px-AStormOfSwords.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (26, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://m.media-amazon.com/images/I/81jpOUts9lL._AC_UF1000,1000_QL80_.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (27, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a3/AFeastForCrows.jpg/220px-AFeastForCrows.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (28, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://m.media-amazon.com/images/I/719+3O6QpqL._AC_UF1000,1000_QL80_.jpg');
+
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (29, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/A_Dance_With_Dragons_US.jpg/220px-A_Dance_With_Dragons_US.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (30, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://m.media-amazon.com/images/I/81MdAWD3vXL._AC_UF1000,1000_QL80_.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (31, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/d/dc/The_Hunger_Games.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (32, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://m.media-amazon.com/images/I/51g34CC4whL._AC_UF350,350_QL80_.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (33, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Catching_Fire_%28Suzanne_Collins_novel_-_cover_art%29.jpg/220px-Catching_Fire_%28Suzanne_Collins_novel_-_cover_art%29.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (34, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://m.media-amazon.com/images/I/71cLEuiVcnL._AC_UF1000,1000_QL80_.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (35, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Mockingjay.JPG/220px-Mockingjay.JPG');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (36, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://m.media-amazon.com/images/I/81WvnmPw4EL._AC_UF1000,1000_QL80_.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (37, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://m.media-amazon.com/images/I/61kMbMCmXIL._AC_UF1000,1000_QL80_.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (38, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://www.bookxcess.com/cdn/shop/products/9781338671162_2_1500x.jpg?v=1693880073');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (39, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://moog.antikvariaattimakedonia.fi/Images/manual/Kiviset%20ja%20Soraset%201965%2004%20001.jpg');
+INSERT INTO `mydb`.`picture` (`idpicture`, `picturename`, `publicationyear`, `artist`, `style`, `description`, `filename`) VALUES (40, 'Unknown', 'Unknown', 'Unknown', 'Unkown', 'Unknown', 'https://moog.antikvariaattimakedonia.fi/Images/manual/Kiviset%20ja%20Soraset%201965%2004%20takakansi%20005.jpg');
+
 
 COMMIT;
 
@@ -224,7 +266,47 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (1, 1, 4);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (8, 1, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (8, 2, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (9, 3, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (9, 4, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (10, 5, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (10, 6, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (11, 7, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (11, 8, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (12, 9, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (12, 10, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (13, 11, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (13, 12, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (14, 13, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (14, 14, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (15, 15, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (15, 16, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (16, 17, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (16, 18, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (17, 19, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (17, 20, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (18, 21, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (18, 22, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (19, 23, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (19, 24, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (20, 25, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (20, 26, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (21, 27, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (21, 28, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (22, 29, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (22, 30, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (23, 31, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (23, 32, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (24, 33, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (24, 34, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (25, 35, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (25, 36, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (26, 37, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (26, 38, 99999);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (1, 39, 0);
+INSERT INTO `mydb`.`artwork` (`idbook`, `idpicture`, `pagenumber`) VALUES (1, 40, 99999);
+
 
 COMMIT;
 
@@ -301,4 +383,3 @@ USE `mydb`;
 INSERT INTO `mydb`.`photo` (`idphoto`, `photoname`, `idbookcopy`, `pagenumber`) VALUES (1, 'roope.png', 1, 4);
 
 COMMIT;
-
